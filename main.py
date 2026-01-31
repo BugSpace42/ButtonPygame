@@ -23,14 +23,22 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+            if plus_button.collidepoint(mouse_pos) and counter < MAX_VALUE:
+                counter += 1
+            elif minus_button.collidepoint(mouse_pos) and counter > MIN_VALUE:
+                counter -= 1
+
+    screen.fill((0, 0, 0))
 
     plus_color = (0, 200, 0)
     pygame.draw.rect(screen, plus_color, plus_button)
-    pygame.draw.rect(screen, (0, 0, 0), plus_button, 2)  # Обводка
+    pygame.draw.rect(screen, (0, 0, 0), plus_button, 2)
 
     minus_color = (200, 0, 0)
     pygame.draw.rect(screen, minus_color, minus_button)
-    pygame.draw.rect(screen, (0, 0, 0), minus_button, 2)  # Обводка
+    pygame.draw.rect(screen, (0, 0, 0), minus_button, 2)
 
     label_text = label_font.render("Текущее значение:", True, (255, 255, 255))
     label_rect = label_text.get_rect(center=(screen_width // 2, screen_width // 8))
